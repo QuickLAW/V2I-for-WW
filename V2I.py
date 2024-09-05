@@ -91,8 +91,8 @@ def adjust_video_duration_and_extract_frames(video_path, output_fps, output_dura
     # 保存帧到输出目录，并显示进度条
     logger.info("💾 正在保存帧到输出目录...")  
   
-    for i, frame in enumerate(tqdm(frames, desc=f"保存进度 ({video_name})")):  
-        output_frame_path = os.path.join(output_dir, f"_log_frame_{i + 1}.jpg")  
+    for i, frame in enumerate(tqdm(frames, desc=f"保存进度")):  
+        output_frame_path = os.path.join(output_dir, f"home_{i + 1}.jpg")  
         cv2.imwrite(output_frame_path, frame)  
   
     # 处理完成的文本也附上文件名  
@@ -152,11 +152,10 @@ if __name__ == "__main__":
     # 设置
     output_fps = 30    
     output_duration = 15    
-    output_resolution = (1920, 1140)    
-    current_video_index = 1  # 当前视频序号  
+    output_resolution = (1280, 760)    
     
     max_len = print_boxed_info(  
-        program_name="V2I for WW v0.1.0",  
+        program_name="V2I for WW v0.1.1",  
         description="一个从视频生成图片序列的小工具",  
         author="QuickLAW",  
         project_link="https://github.com/QuickLAW/V2I-for-WW/",  
@@ -175,6 +174,7 @@ if __name__ == "__main__":
     total_videos = len(video_paths)  # 计算视频总数  
     
     # 开始批处理
+    current_video_index = 1  # 当前视频序号  
     for video_path in video_paths:    
         video_name = os.path.splitext(os.path.basename(video_path))[0]    
         output_dir = create_sequential_output_dir(base_output_dir, video_name)    
